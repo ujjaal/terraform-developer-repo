@@ -91,9 +91,24 @@ jobs:
       uses: hashicorp/setup-terraform@v2.0.3
 
     # Login to Azure using User-Assigned Managed Identity
-    - name: Login to Azure using User-Assigned Managed Identity
-      run: |
-        az login --identity
+  #  - name: Login to Azure using User-Assigned Managed Identity
+  #    run: |
+  #      az login --identity
+
+    - name: Azure CLI Login
+      uses: azure/login@v2
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - name: Azure CLI script
+      uses: azure/cli@v2
+      with:
+        azcliversion: latest
+        inlineScript: |
+          az account show
+          # You can write your Azure CLI inline scripts here. 
       
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
