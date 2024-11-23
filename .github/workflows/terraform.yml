@@ -70,7 +70,7 @@ jobs:
     defaults:
       run:
         shell: bash
-
+      working-directory: avm-labs/part01-base
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
