@@ -53,6 +53,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 jobs:
   terraform:
@@ -64,7 +65,7 @@ jobs:
       ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
       ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
   #    ARM_USE_MSI: true
-      AR<_USE_OIDC: true
+      ARM_USE_OIDC: true
   #    ARM_USE_AZUREAD: true # This environment variable tells the backend to use AzureAD auth rather than trying a create a key. It means we can limit the permissions applied to the storage account and container to least priviledge: https://developer.hashicorp.com/terraform/language/settings/backends/azurerm#use_azuread_auth
 
 
@@ -77,11 +78,7 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v4
-    
-#    # Login to Azure using User-Assigned Managed Identity
-#    - name: Login to Azure using User-Assigned Managed Identity
-#      run: |
-#        az login --identity
+  
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
  #   - name: Setup Terraform
@@ -92,6 +89,11 @@ jobs:
 
     - name: HashiCorp - Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
+
+    # Login to Azure using User-Assigned Managed Identity
+    - name: Login to Azure using User-Assigned Managed Identity
+      run: |
+        az login --identity
       
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
