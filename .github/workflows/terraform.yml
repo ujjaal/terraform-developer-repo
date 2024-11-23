@@ -162,6 +162,9 @@ jobs:
       run: terraform fmt -check -diff
 
     # Generates an execution plan for Terraform
+    - name: Print Working Directory
+      run: pwd
+      
     - name: Terraform Plan
       run: terraform plan -var-file="./terraform.tfvars"
         
