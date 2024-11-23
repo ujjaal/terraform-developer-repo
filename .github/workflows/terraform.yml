@@ -71,8 +71,8 @@ jobs:
     
     # Login to Azure using User-Assigned Managed Identity
     - name: Login to Azure using Service Principal
-        run: |
-          az login --identity
+      run: |
+        az login --identity
 
 #    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
 #    - name: Setup Terraform
