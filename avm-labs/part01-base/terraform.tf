@@ -10,11 +10,11 @@ terraform {
       version = "~> 3.5"
     }
   }
-    backend "azurerm" {
-        resource_group_name  = "platform-rg"  
-        storage_account_name = "saplatterraformstate"
-        container_name       = "terraform-state"
-        key                  = "terraform.tfstate"
+  backend "azurerm" {
+      resource_group_name  = "platform-rg"  
+      storage_account_name = "saplatterraformstate"
+      container_name       = "terraform-state"
+      key                  = "terraform.tfstate"
   }
 }
 
