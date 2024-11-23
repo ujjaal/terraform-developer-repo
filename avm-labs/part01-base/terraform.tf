@@ -11,9 +11,10 @@ terraform {
     }
   }
     backend "azurerm" {
-    storage_account_name = "saplatterraformstate"
-    container_name       = "terraform-state"
-    key                  = "terraform.tfstate"
+        resource_group_name  = "platform-rg"  
+        storage_account_name = "saplatterraformstate"
+        container_name       = "terraform-state"
+        key                  = "terraform.tfstate"
   }
 }
 
