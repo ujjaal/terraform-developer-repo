@@ -164,6 +164,7 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Print Working Directory
       run: pwd
+      run: ls -al
 
     - name: Terraform Plan
       run: terraform plan -var-file="terraform.tfvars"
