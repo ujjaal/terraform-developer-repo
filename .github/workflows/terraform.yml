@@ -166,7 +166,7 @@ jobs:
       run: pwd
 
     - name: Terraform Plan
-      run: terraform plan -var-file="./terraform.tfvars"
+      run: terraform plan -var-file="terraform.tfvars"
         
       #-input=false
 
