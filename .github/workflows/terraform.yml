@@ -61,7 +61,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: avm-labs/part01-base
+        working-directory: terraform-developer-repo/avm-labs/part01-base
 
     steps:
     
@@ -112,7 +112,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: avm-labs/part01-base
+        working-directory: terraform-developer-repo/avm-labs/part01-base
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
@@ -164,7 +164,7 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Print Working Directory
       run: pwd
-      
+
     - name: Terraform Plan
       run: terraform plan -var-file="./terraform.tfvars"
         
