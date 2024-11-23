@@ -56,8 +56,14 @@ permissions:
 jobs:
   terraform:
     name: 'Terraform'
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     environment: Dev
+    env:
+      ARM_CLIENT_ID: "${{ secrets.AZURE_CLIENT_ID }}"
+      ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+      ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
+      ARM_USE_AZUREAD: true # This environment variable tells the backend to use AzureAD auth rather than trying a create a key. It means we can limit the permissions applied to the storage account and container to least priviledge: https://developer.hashicorp.com/terraform/language/settings/backends/azurerm#use_azuread_auth
+
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -69,17 +75,21 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     
-    # Login to Azure using User-Assigned Managed Identity
-    - name: Login to Azure using Service Principal
-      run: |
-        az login --identity
+#    # Login to Azure using User-Assigned Managed Identity
+#    - name: Login to Azure using User-Assigned Managed Identity
+#      run: |
+#        az login --identity
 
-#    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-#    - name: Setup Terraform
-#      uses: hashicorp/setup-terraform@v1
-#      with:
-#        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+ #   - name: Setup Terraform
+ #     uses: hashicorp/setup-terraform@v1
+ #     with:
+ #       cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
+
+    - name: HashiCorp - Setup Terraform
+      uses: hashicorp/setup-terraform@v2.0.3
+      
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
@@ -95,5 +105,6 @@ jobs:
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
-      if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-      run: terraform apply -auto-approve -input=false
+     # if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
+      run: terraform apply -auto-approve #-input=false
+      
