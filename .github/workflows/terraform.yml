@@ -161,13 +161,15 @@ jobs:
     - name: Terraform Format
       run: terraform fmt -check -diff
 
-    # Generates an execution plan for Terraform
+    # checking the current directory
     - name: Print Working Directory
       run: pwd
-
+    
+    # Listing the files in the current directory
     - name: List Files
       run: ls -al
-
+    
+    # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -var-file="terraform.tfvars"
         
