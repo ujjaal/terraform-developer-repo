@@ -61,7 +61,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: terraform-developer-repo/avm-labs/part01-base
+        working-directory: avm-labs/part01-base
 
     steps:
     
@@ -112,7 +112,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: terraform-developer-repo/avm-labs/part01-base
+        working-directory: avm-labs/part01-base
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
