@@ -163,7 +163,7 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -var-file="../avm-labs/part01-base/terraform.tfvars"
+      run: terraform plan -var-file="variables.tf"
         
       #-input=false
 
