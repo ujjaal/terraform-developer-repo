@@ -164,6 +164,8 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Print Working Directory
       run: pwd
+
+    - name: List Files
       run: ls -al
 
     - name: Terraform Plan
