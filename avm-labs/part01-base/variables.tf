@@ -12,3 +12,4 @@ variable "environment" {
   type        = string
   description = "The deployment environment (dev, test, prod)"
 }
+
