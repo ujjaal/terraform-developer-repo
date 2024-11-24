@@ -1,7 +1,10 @@
 # Define resource names
 locals {
-  unique_postfix = random_pet.unique_name.id
+    
+  # Define environment variable
+  environment = var.environment
 
-  resource_group_name          = "rg-demo-${local.unique_postfix}"
-  log_analytics_workspace_name = "law-demo-${local.unique_postfix}"
+  # Use environment variable and unique ID for resource names
+  resource_group_name = format("rg-monitoring-%s", local.environment)
+  log_analytics_workspace_name = format("law-%s", local.environment)
 }
