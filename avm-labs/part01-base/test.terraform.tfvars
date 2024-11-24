@@ -6,4 +6,4 @@ tags = {
 }
 
 # Add the environment variable
-environment = "test" 
+environment = "test"
