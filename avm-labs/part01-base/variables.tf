@@ -9,6 +9,6 @@ variable "tags" {
 }
 
 variable "environment" {
-  type = string
+  type        = string
   description = "The deployment environment (dev, test, prod)"
 }
